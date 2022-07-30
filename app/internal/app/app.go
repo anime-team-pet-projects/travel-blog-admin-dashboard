@@ -14,6 +14,7 @@ import (
 	"time"
 	"travel-blog-admin-panel/internal/config"
 	"travel-blog-admin-panel/pkg/logging"
+	"travel-blog-admin-panel/pkg/metric"
 
 	httpSwagger "github.com/swaggo/http-swagger"
 )
@@ -33,9 +34,14 @@ func NewApp(config *config.Config, logger *logging.Logger) (App, error) {
 	router.Handler(http.MethodGet, "/swagger", http.RedirectHandler("/swagger/index.html", http.StatusMovedPermanently))
 	router.Handler(http.MethodGet, "/swagger/*any", httpSwagger.WrapHandler)
 
+	logger.Println("heartbeat metric init")
+	metricHandler := metric.Handler{}
+	metricHandler.Register(router)
+
 	return App{
 		cfg:    config,
 		logger: logger,
+		router: router,
 	}, nil
 }
 
