@@ -17,6 +17,7 @@ import (
 	"travel-blog-admin-panel/pkg/metric"
 
 	httpSwagger "github.com/swaggo/http-swagger"
+	_ "travel-blog-admin-panel/docs"
 )
 
 type App struct {
