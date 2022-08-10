@@ -17,13 +17,13 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE public.user
 (
-    id         UUID PRIMARY KEY     DEFAULT gen_random_uuid(),
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name TEXT        NOT NULL,
     last_name  TEXT        NOT NULL,
     username   TEXT UNIQUE NOT NULL,
     email      TEXT UNIQUE NOT NULL,
     profession TEXT,
-    is_staff   BOOLEAN     NOT NULL DEFAULT false,
+    role       TEXT        NOT NULL,
     image_id   UUID,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ
