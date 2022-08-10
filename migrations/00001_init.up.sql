@@ -34,7 +34,9 @@ CREATE TABLE public.post
     id       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title    TEXT NOT NULL,
     content  TEXT NOT NULL,
-    owner_id INT REFERENCES public.user (id)
+    owner_id INT REFERENCES public.user (id),
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
 );
 
 COMMIT;
