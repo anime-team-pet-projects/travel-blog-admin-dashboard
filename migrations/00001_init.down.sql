@@ -1,0 +1,6 @@
+BEGIN;
+
+DROP TABLE IF EXISTS public.user CASCADE;
+DROP TABLE IF EXISTS public.post CASCADE;
+
+END;

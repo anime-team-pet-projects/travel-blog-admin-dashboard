@@ -22,6 +22,13 @@ type Config struct {
 			Password string `env:"ADMIN_PWD" env-default:"admin"`
 		}
 	}
+	PostgreSQL struct {
+		Username string `env:"username" env-required:"true"`
+		Password string `env:"password" env-required:"true"`
+		Host     string `env:"host" env-required:"true"`
+		Port     string `env:"port" env-required:"true"`
+		Database string `env:"database" env-required:"true"`
+	}
 }
 
 var instance *Config
