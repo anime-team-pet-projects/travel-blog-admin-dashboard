@@ -1,9 +1,10 @@
 package config
 
 import (
-	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"sync"
+
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type Config struct {
@@ -23,11 +24,11 @@ type Config struct {
 		}
 	}
 	PostgreSQL struct {
-		Username string `env:"username" env-required:"true"`
-		Password string `env:"password" env-required:"true"`
-		Host     string `env:"host" env-required:"true"`
-		Port     string `env:"port" env-required:"true"`
-		Database string `env:"database" env-required:"true"`
+		Username string `env:"POSTGRES_USER" env-required:"true"`
+		Password string `env:"POSTGRES_PASSWORD" env-required:"true"`
+		Host     string `env:"POSTGRES_HOST" env-required:"true"`
+		Port     string `env:"POSTGRES_PORT" env-required:"true"`
+		Database string `env:"POSTGRES_DB" env-required:"true"`
 	}
 }
 
