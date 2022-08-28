@@ -4,9 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/julienschmidt/httprouter"
-	"github.com/rs/cors"
 	"net"
 	"net/http"
 	"os"
@@ -14,12 +11,18 @@ import (
 	"path/filepath"
 	"time"
 	"travel-blog-admin-panel/internal/config"
+	"travel-blog-admin-panel/internal/handlers/posts"
 	"travel-blog-admin-panel/pkg/client/postgresql"
 	"travel-blog-admin-panel/pkg/logging"
 	"travel-blog-admin-panel/pkg/metric"
 
-	httpSwagger "github.com/swaggo/http-swagger"
+	"github.com/jackc/pgx/v4/pgxpool"
+	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
+
 	_ "travel-blog-admin-panel/docs"
+
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 type App struct {
@@ -41,6 +44,9 @@ func NewApp(config *config.Config, logger *logging.Logger) (App, error) {
 	logger.Println("heartbeat metric init")
 	metricHandler := metric.Handler{}
 	metricHandler.Register(router)
+
+	postsHandler := posts.NewPostsHandler()
+	postsHandler.Register(router)
 
 	pgConfig := postgresql.NewPgConfig(
 		config.PostgreSQL.Username, config.PostgreSQL.Password,
